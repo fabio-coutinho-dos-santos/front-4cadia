@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { UserService } from 'src/app/Services/user.service';
 import { User } from '../../Models/User';
 import { Storage } from '../../Untils/Storage';
@@ -19,6 +20,7 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private userService:UserService,
+    private router:Router,
     private storage:Storage
     ) { }
 
@@ -42,7 +44,8 @@ export class RegisterComponent implements OnInit {
     .subscribe((user:User)=>{
       this.storage.setItem(StorageKeysTypes.TOKEN,user.token)
       this.storage.setItem(StorageKeysTypes.ID_USER,user._id)
-      window.location.reload()
+      this.storage.setItem(StorageKeysTypes.LOGGED,"TRUE")
+      this.router.navigate(['/dashboard']);
     },(err)=>{
       alert(JSON.stringify(err.error.errors[0]))
     })

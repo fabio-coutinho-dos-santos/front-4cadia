@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { User } from '../../Models/User';
 import { UserService } from '../../Services/user.service';
 import { Storage } from '../../Untils/Storage';
@@ -18,6 +19,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private userService:UserService,
+    private router:Router,
     private storage:Storage
     ) { }
 
@@ -34,7 +36,8 @@ export class LoginComponent implements OnInit {
     .subscribe((user:User)=>{
       this.storage.setItem(StorageKeysTypes.TOKEN,user.token)
       this.storage.setItem(StorageKeysTypes.ID_USER,user._id)
-      window.location.reload()
+      this.storage.setItem(StorageKeysTypes.LOGGED,"TRUE")
+      this.router.navigate(['/dashboard']);
     },(err)=>{
       alert(JSON.stringify(err.error.errors[0]))
     })

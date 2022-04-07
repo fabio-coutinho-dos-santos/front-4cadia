@@ -23,19 +23,15 @@ export class AppComponent implements OnInit{
 
   ngOnInit(): void {
 
-    // this.storage.cleanStorage()
     this.statusLogged = this.storage.getItem(StorageKeysTypes.LOGGED)
     this.token = this.storage.getItem(StorageKeysTypes.TOKEN)
-
-    console.log(this.statusLogged)
-
     this.userService.validateToken(this.token)
     .subscribe((resp)=>{
       if(resp.valid){
         this.goToDashboard()
       }else{
         this.storage.setItem(StorageKeysTypes.LOGGED,"FALSE")
-        // this.router.navigate(['/login']);
+        this.router.navigate(['/login']);
       }
     },(err)=>{
       console.log(err)
@@ -43,8 +39,8 @@ export class AppComponent implements OnInit{
   }
 
   public goToDashboard(){
+    this.storage.setItem(StorageKeysTypes.LOGGED,"TRUE")
     this.router.navigate(['/dashboard']);
-    console.log("Logado")
   }
 
   }
