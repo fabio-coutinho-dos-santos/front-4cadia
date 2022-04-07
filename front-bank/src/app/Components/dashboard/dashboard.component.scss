@@ -23,7 +23,12 @@ mat-sidenav{
   align-items: center;
   font-size: 2rem;
   color: lightblue;
+  background: #e3f2fd;
   border-radius: 10px;
+}
+
+.divider-main {
+  background-color: grey;
 }
 
 .menu-button{
@@ -40,6 +45,14 @@ mat-sidenav{
 
 mat-sidenav-container {
   height: calc(100vh - 65px);
+}
+
+mat-card {
+  border-radius: 10px;
+}
+
+.card-content {
+  margin-top: 10%;
 }
 
 .avatar {
