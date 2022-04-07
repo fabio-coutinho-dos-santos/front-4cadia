@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { User } from '../Models/User';
-import { UserService } from '../Services/user.service';
-import { Storage } from '../Untils/Storage';
-import StorageKeysTypes  from "../Untils/StorageKeyTypes"
+import { User } from '../../Models/User';
+import { UserService } from '../../Services/user.service';
+import { Storage } from '../../Untils/Storage';
+import StorageKeysTypes  from "../../Untils/StorageKeyTypes"
 
 @Component({
   selector: 'app-login',
