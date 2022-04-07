@@ -53,4 +53,28 @@ export class UserService {
   )
   .pipe(map((resp:any)=>resp))
   }
+
+  public makeRegister (name:string,email:string,password:string,confirmPassword:string) : Observable<User>{
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+      })
+  }
+
+  let jsonObjset = {
+    name:name,
+    email:email,
+    password:password,
+    confirmPassword:confirmPassword
+  }
+
+  return this.http.post(
+      `${ Contants.URL_DEV }/oapi/signup`,
+      JSON.stringify(jsonObjset),
+      httpOptions
+  )
+  .pipe(map((resp:User)=>resp))
+  }
+
 }

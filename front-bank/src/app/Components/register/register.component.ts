@@ -23,7 +23,7 @@ export class RegisterComponent implements OnInit {
     ) { }
 
   public registerForm: FormGroup = new FormGroup({
-    'name': new FormControl(null, [Validators.required, Validators.email]),
+    'name': new FormControl(null, [Validators.required]),
     'email': new FormControl(null, [Validators.required, Validators.email]),
     'password': new FormControl(null, [Validators.required]),
     'confirmPassword': new FormControl(null, [Validators.required])
@@ -33,7 +33,12 @@ export class RegisterComponent implements OnInit {
 
   public submitCredentials(){
     this.flagSubmit=true
-    this.userService.makeLogin(this.registerForm.value.email, this.registerForm.value.password)
+    this.userService.makeRegister(
+      this.registerForm.value.name,
+      this.registerForm.value.email,
+      this.registerForm.value.password,
+      this.registerForm.value.confirmPassword
+      )
     .subscribe((user:User)=>{
       this.storage.setItem(StorageKeysTypes.TOKEN,user.token)
       this.storage.setItem(StorageKeysTypes.ID_USER,user._id)
