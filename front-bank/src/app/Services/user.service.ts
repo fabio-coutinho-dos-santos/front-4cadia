@@ -15,10 +15,6 @@ export class UserService {
 
   public makeLogin (email:string,password:string) : Observable<User>{
 
-    console.log(email)
-    console.log(password)
-    let url = Contants.URL_DEV
-
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
@@ -36,6 +32,25 @@ export class UserService {
       httpOptions
   )
   .pipe(map((resp:User)=>resp))
+  }
 
+  public validateToken (token:string) : Observable<any>{
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+      })
+  }
+
+  let jsonObjset = {
+    token:token
+  }
+
+  return this.http.post(
+      `${ Contants.URL_DEV }/oapi/validateToken`,
+      JSON.stringify(jsonObjset),
+      httpOptions
+  )
+  .pipe(map((resp:any)=>resp))
   }
 }

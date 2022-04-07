@@ -33,11 +33,11 @@ export class LoginComponent implements OnInit {
     this.userService.makeLogin(this.loginForm.value.email, this.loginForm.value.password)
     .subscribe((user:User)=>{
       this.storage.setItem(StorageKeysTypes.TOKEN,user.token)
+      this.storage.setItem(StorageKeysTypes.ID_USER,user._id)
       window.location.reload()
     },(err)=>{
       alert(JSON.stringify(err.error.errors[0]))
     })
-
   }
 
 }

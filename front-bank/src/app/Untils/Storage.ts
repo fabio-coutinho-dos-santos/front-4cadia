@@ -15,9 +15,19 @@ export class Storage{
 
   public cleanStorage(){
     this.setItem(StorageKeysTypes.TOKEN,"")
+    this.setItem(StorageKeysTypes.LOGGED,"FALSE")
+    this.setItem(StorageKeysTypes.ID_USER,"")
   }
 
   public cleanTokenStorage(){
     this.setItem(StorageKeysTypes.TOKEN,"")
+  }
+
+  public cleanLoggedStorage(){
+    this.setItem(StorageKeysTypes.LOGGED,"")
+  }
+
+  public cleanIdUserStorage(){
+    this.setItem(StorageKeysTypes.ID_USER,"")
   }
 }
