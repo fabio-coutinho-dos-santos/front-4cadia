@@ -77,4 +77,20 @@ export class UserService {
   .pipe(map((resp:User)=>resp))
   }
 
+  public getUserById (id:string,token:string) : Observable<User>{
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':'application/json',
+        'Authorization':token
+      })
+  }
+
+  return this.http.get(
+      `${ Contants.URL_DEV }/api/user/${id}`,
+      httpOptions
+  )
+  .pipe(map((resp:User)=>resp))
+  }
+
 }
