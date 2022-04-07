@@ -14,21 +14,36 @@ mat-sidenav{
   padding: 16px;
 }
 
+
+.mat-tab-label-container {
+  display: flex;
+  flex-grow: 1;
+  overflow: hidden;
+  z-index: 1;
+  overflow-x: scroll !important;
+}
+
 .content {
   height: calc(100vh - 98px);
   margin: 16px;
   margin-left: 32px;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content:  flex-start;
+  align-items: flex-start;
   font-size: 2rem;
-  color: lightblue;
-  background: #e3f2fd;
+  color: black;
+  background: white;
   border-radius: 10px;
 }
 
 .divider-main {
   background-color: grey;
+}
+
+.card {
+  padding: 40px;
+  height: 100vh;
+  overflow: auto;
 }
 
 .menu-button{
@@ -49,6 +64,10 @@ mat-sidenav-container {
 
 mat-card {
   border-radius: 10px;
+  padding: 20px;
+  align-items: center;
+  justify-content: center;
+
 }
 
 .card-content {

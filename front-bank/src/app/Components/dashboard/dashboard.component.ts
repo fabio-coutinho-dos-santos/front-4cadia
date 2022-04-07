@@ -1,11 +1,12 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatSidenav } from '@angular/material';
+import { MatSidenav, MatTabChangeEvent } from '@angular/material';
 import { Router } from '@angular/router';
 import { User } from 'src/app/Models/User';
 import { UserService } from 'src/app/Services/user.service';
 import { Storage } from '../../Untils/Storage';
 import StorageKeysTypes  from "../../Untils/StorageKeyTypes"
+import Months from 'src/app/Untils/Months';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,12 +14,14 @@ import StorageKeysTypes  from "../../Untils/StorageKeyTypes"
   styleUrls: ['./dashboard.component.scss'],
   providers:[Storage,UserService]
 })
+
 export class DashboardComponent implements OnInit {
 
   @ViewChild(MatSidenav,null)
   sidenav!: MatSidenav;
 
   public currentUser:User
+  public months = Months
 
   constructor(
     private storage:Storage,
@@ -30,6 +33,11 @@ export class DashboardComponent implements OnInit {
   private logged = this.storage.getItem(StorageKeysTypes.LOGGED)
 
   ngOnInit() {
+
+    this.router.navigate["dashboard"]
+
+    document.getElementsByClassName('mat-tab-header-pagination-before')[0].remove();
+    document.getElementsByClassName('mat-tab-header-pagination-after')[0].remove();
 
     if(this.logged=="FALSE"){
       this.router.navigate(["login"])
@@ -53,6 +61,11 @@ export class DashboardComponent implements OnInit {
         alert(JSON.stringify(err.error.errors[0]))
       })
     }
+  }
+
+  tabChanged = (tabChangeEvent: MatTabChangeEvent): void => {
+    console.log('tabChangeEvent => ', tabChangeEvent);
+    console.log('index => ', tabChangeEvent.index);
   }
 
   public exitApp(){
