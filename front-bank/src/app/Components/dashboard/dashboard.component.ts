@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatSidenav } from '@angular/material';
 import { Router } from '@angular/router';
 import { Storage } from '../../Untils/Storage';
 import StorageKeysTypes  from "../../Untils/StorageKeyTypes"
@@ -11,7 +13,14 @@ import StorageKeysTypes  from "../../Untils/StorageKeyTypes"
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private storage:Storage, private router:Router) { }
+  @ViewChild(MatSidenav,null)
+  sidenav!: MatSidenav;
+
+  constructor(
+    private storage:Storage,
+    private router:Router,
+    private observer:BreakpointObserver
+    ) { }
 
   private logged = this.storage.getItem(StorageKeysTypes.LOGGED)
 
@@ -23,6 +32,21 @@ export class DashboardComponent implements OnInit {
       this.router.navigate(["login"])
     }
 
+    this.observer.observe(['(max-width: 800px)']).subscribe((res)=>{
+      if(res.matches){
+        this.sidenav.mode='over'
+        this.sidenav.close()
+      }else{
+        this.sidenav.mode='side'
+        this.sidenav.open()
+      }
+    });
+
+  }
+
+  public exitApp(){
+    this.storage.cleanStorage()
+    this.router.navigate(["login"])
   }
 
 }

@@ -22,7 +22,6 @@ export class AppComponent implements OnInit{
   }
 
   ngOnInit(): void {
-
     this.statusLogged = this.storage.getItem(StorageKeysTypes.LOGGED)
     this.token = this.storage.getItem(StorageKeysTypes.TOKEN)
     this.userService.validateToken(this.token)
@@ -31,7 +30,6 @@ export class AppComponent implements OnInit{
         this.goToDashboard()
       }else{
         this.storage.setItem(StorageKeysTypes.LOGGED,"FALSE")
-        this.router.navigate(['/login']);
       }
     },(err)=>{
       console.log(err)
