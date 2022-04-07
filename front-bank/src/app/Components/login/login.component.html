@@ -5,7 +5,7 @@
 <div class="sidenav">
          <div class="login-main-text">
             <h2>Application<br> Login Page</h2>
-            <p>Login or register from here to access.</p>
+            <p>Login from here to access.</p>
          </div>
       </div>
       <div class="main">
@@ -24,7 +24,7 @@
                   <button type="submit" [disabled]="!loginForm.valid" class="btn btn-black">Login</button>
               </form>
               <div class="text-register">
-                <a href="#">Don't have an account, register!</a>
+                <a href="register">Don't have an account, register!</a>
               </div>
               <div *ngIf="flagSubmit" style="height: 80px;" class="d-flex justify-content-center">
                 <div style="margin-top: 10px;" class="spinner-border text-danger" role="status">
