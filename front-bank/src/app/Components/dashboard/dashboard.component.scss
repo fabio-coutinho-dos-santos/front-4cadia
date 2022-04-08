@@ -1,12 +1,14 @@
 mat-toolbar{
   background: #01579b;
   color: white;
+  font-size: 1rem;
+
 }
 
 
 mat-sidenav{
   margin: 16px;
-  width: 250px;
+  width: 200px;
   border-right: none;
   background: #01579b;
   color: white;
@@ -46,6 +48,16 @@ mat-sidenav{
   overflow: auto;
 }
 
+.span-toolbar{
+  flex: 1 1 auto;
+}
+.example-icon {
+  padding: 0 14px;
+}
+.example-spacer {
+  flex: 1 1 auto;
+}
+
 .menu-button{
   width: 100%;
   display: flex;
@@ -68,6 +80,13 @@ mat-card {
   align-items: center;
   justify-content: center;
 
+}
+.balance{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 1rem;
 }
 
 .card-content {
