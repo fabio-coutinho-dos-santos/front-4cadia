@@ -11,18 +11,18 @@ const Months = [
   "Oct/21",
   "Nov/21",
   "Dec/21",
-  "Jan",
-  "Feb",
-  "Mar",
-  "Apr",
-  "May",
-  "June",
-  "July",
-  "Aug",
-  "Sep",
-  "Oct",
-  "Nov",
-  "Dec"
+  "Jan/22",
+  "Feb/22",
+  "Mar/22",
+  "Apr/22",
+  "May/22",
+  "June/22",
+  "July/22",
+  "Aug/22",
+  "Sep/22",
+  "Oct/22",
+  "Nov/22",
+  "Dec/22"
 ]
 
 export default Months

@@ -27,7 +27,8 @@ export class DashboardComponent implements OnInit {
   public currentUser:User
   public months = Months
   public flagLoadingInformations=false
-  public currentMonth = 0
+  public currentMonth = ""
+  public currentYear = ""
   public indexTab = 0
   public finalBalance=0
   public operations:Operation[]=[]
@@ -43,11 +44,6 @@ export class DashboardComponent implements OnInit {
 
   private logged = this.storage.getItem(StorageKeysTypes.LOGGED)
 
-  public getIndexCurrentMonth(date:string){
-    let aux = date.split("/")
-    return aux[0]
-  }
-
   ngOnInit() {
 
     this.router.navigate["dashboard"]
@@ -56,8 +52,11 @@ export class DashboardComponent implements OnInit {
     document.getElementsByClassName('mat-tab-header-pagination-before')[0].remove();
     document.getElementsByClassName('mat-tab-header-pagination-after')[0].remove();
 
-    this.currentMonth = parseInt(this.getIndexCurrentMonth(moment().format('l')))
-    this.indexTab = this.currentMonth + 11
+    this.currentMonth = this.getIndexCurrentMonth(moment().format('l'))
+    this.currentYear = this.getIndexCurrentYear(moment().format('l'))
+    this.indexTab = parseInt(this.currentMonth) + 11
+    console.log(this.currentMonth)
+    console.log(this.currentYear)
 
     if(this.logged=="FALSE"){
       this.router.navigate(["login"])
@@ -72,32 +71,59 @@ export class DashboardComponent implements OnInit {
         }
       });
 
-      this.userService.getUserById(
-        this.storage.getItem(StorageKeysTypes.ID_USER),
-        this.storage.getItem(StorageKeysTypes.TOKEN))
-      .subscribe((user:User)=>{
-        this.flagLoadingInformations=true
-        this.currentUser=user
-      },(err)=>{
-        alert(JSON.stringify(err.error.errors[0]))
-      })
-
-      this.operationService.getBalance(this.storage.getItem(StorageKeysTypes.TOKEN))
-      .subscribe((resp:any)=>{
-        this.finalBalance=resp.balance
-      },(err)=>{
-        alert(JSON.stringify(err.error.errors[0]))
-      })
-
-      this.operationService.getStatementByDate("06","2022",this.storage.getItem(StorageKeysTypes.TOKEN))
-      .subscribe((operations:Operation[])=>{
-
-      },(err)=>{
-        alert(JSON.stringify(err.error.errors[0]))
-      })
-
+      this.getUserById()
+      this.getBalanceOperations()
+      this.getStatementByDate(this.currentMonth,this.currentYear)
     }
   }
+
+
+  public getUserById(){
+    this.userService.getUserById(
+      this.storage.getItem(StorageKeysTypes.ID_USER),
+      this.storage.getItem(StorageKeysTypes.TOKEN))
+    .subscribe((user:User)=>{
+      this.flagLoadingInformations=true
+      this.currentUser=user
+    },(err)=>{
+      alert(JSON.stringify(err.error.errors[0]))
+    })
+  }
+
+  public getBalanceOperations(){
+    this.operationService.getBalance(this.storage.getItem(StorageKeysTypes.TOKEN))
+    .subscribe((resp:any)=>{
+      this.finalBalance=resp.balance
+    },(err)=>{
+      alert(JSON.stringify(err.error.errors[0]))
+    })
+  }
+
+  public getStatementByDate(month:string,year:string){
+    this.operationService.getStatementByDate(month,year,this.storage.getItem(StorageKeysTypes.TOKEN))
+    .subscribe((operations:Operation[])=>{
+      this.operations=operations
+    },(err)=>{
+      alert(JSON.stringify(err.error.errors[0]))
+    })
+
+  }
+
+  public getIndexCurrentMonth(date:string){
+    let aux = date.split("/")
+    let month = aux[0]
+    if (parseInt(month) < 10){
+      month = "0"+month
+    }
+    return month
+  }
+
+  public getIndexCurrentYear(date:string){
+    let aux = date.split("/")
+    return aux[2]
+  }
+
+  // ============================================================================ Functions called by screen ========================================================================================
 
   public tabChanged = (tabChangeEvent: MatTabChangeEvent): void => {
     console.log('tabChangeEvent => ', tabChangeEvent);
@@ -108,5 +134,7 @@ export class DashboardComponent implements OnInit {
     this.storage.cleanStorage()
     this.router.navigate(["login"])
   }
+  // ============================================================================================================================================================================================
+
 
 }
