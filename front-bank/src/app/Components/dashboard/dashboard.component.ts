@@ -7,12 +7,13 @@ import { UserService } from 'src/app/Services/user.service';
 import { Storage } from '../../Untils/Storage';
 import StorageKeysTypes  from "../../Untils/StorageKeyTypes"
 import Months from 'src/app/Untils/Months';
+import { OperationService } from 'src/app/Services/operation.service';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
-  providers:[Storage,UserService]
+  providers:[Storage,UserService,OperationService]
 })
 
 export class DashboardComponent implements OnInit {
@@ -30,6 +31,7 @@ export class DashboardComponent implements OnInit {
     private storage:Storage,
     private router:Router,
     private userService:UserService,
+    private operationService:OperationService,
     private observer:BreakpointObserver
     ) { }
 
