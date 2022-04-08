@@ -10,7 +10,7 @@
   </button>
   Dashboard
   <span class="span-toolbar" ></span>
-  <span class="balance-toolbar" *ngIf="flagLoadingInformations && sidenav.mode=='over'"  >{{finalBalance}} $</span>
+  <span class="balance-toolbar" *ngIf="flagLoadingInformations && sidenav.mode=='over'"  >$ {{finalBalance}}</span>
   <div *ngIf="!flagLoadingInformations" style="height: 50px;padding-left: 10px;" class="d-flex justify-content-end">
     <div style="margin-top: 10px;" class="spinner-border text-danger" role="status">
       <span class="visually-hidden"></span>
@@ -25,7 +25,7 @@
       <img class="avatar mat-elevation-z8" src="assets/images/boss.png">
     </div>
     <p *ngIf="flagLoadingInformations" class="name">{{currentUser.name}}</p>
-    <p class="balance"*ngIf="flagLoadingInformations && sidenav.mode=='side'">{{finalBalance}} $</p>
+    <p class="balance"*ngIf="flagLoadingInformations && sidenav.mode=='side'">$ {{finalBalance}}</p>
     <mat-divider></mat-divider>
 
     <button (click)="exitApp()" mat-button class="menu-button">
@@ -38,15 +38,26 @@
     <div class="content mat-elevation-z8">
       <mat-tab-group (selectedTabChange)="tabChanged($event)" [selectedIndex]="indexTab" class="mat-tab-label-container">
         <mat-tab *ngFor="let month of months" label={{month}}>
+
           <div class="card">
             <mat-card *ngIf="flagLoadingStatement">
-              <mat-card-title> Balance
-                <mat-divider class="divider-main"></mat-divider>
-              </mat-card-title>
+              <mat-card-title> Current Balance = $ {{finalBalance}}</mat-card-title>
               <mat-card-content class="card-content">
-                <p>Total credit operations = 10</p>
-                <p>Total debit operations = 10</p>
-                <p>Final Balance = 10</p>
+                <mat-card-subtitle class="subtitle">Apr/22</mat-card-subtitle>
+                <div *ngFor="let operation of operations">
+                  <div *ngIf="operation.type == 'Credit'" class="operations-credit">
+                    <p>
+                      {{operation.description}} +{{operation.amount}}$ <br>
+                      {{operation.date}} - {{operation.hour}}
+                    </p>
+                  </div>
+                  <div *ngIf="operation.type == 'Debit'" class="operations-debit">
+                    <p>
+                      {{operation.description}} - {{operation.amount}}$ <br>
+                      {{operation.date}} - {{operation.hour}}
+                    </p>
+                  </div>
+                </div>
               </mat-card-content>
             </mat-card>
             <div *ngIf="!flagLoadingStatement" class="d-flex justify-content-center">

@@ -49,11 +49,17 @@ mat-sidenav{
 
 .divider-main {
   background-color: grey;
+  margin-top: 16px;
+  margin-bottom: 20px;
+}
+
+.subtitle {
+  font-size: large;
 }
 
 .card {
-  padding: 40px;
-  height: 100vh;
+  padding-top: 40px;
+  height: 82vh;
   overflow: auto;
 }
 
@@ -98,6 +104,7 @@ mat-card {
   font-size: 1rem;
 }
 
+
 .balance-toolbar{
   display: flex;
   align-items: center;
@@ -105,7 +112,7 @@ mat-card {
 }
 
 .card-content {
-  margin-top: 10%;
+  margin-top: 20px;
 }
 
 .avatar-align {
@@ -122,6 +129,20 @@ mat-card {
   width: 130px;
   height: 130px;
   border-radius: 50%;
+}
+
+.operations-credit {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  color: green;
+}
+
+.operations-debit{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  color: red;
 }
 
 .name {
