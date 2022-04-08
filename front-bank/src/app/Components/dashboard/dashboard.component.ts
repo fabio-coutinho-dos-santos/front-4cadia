@@ -23,7 +23,8 @@ export class DashboardComponent implements OnInit {
   public currentUser:User
   public months = Months
   public flagLoadingInformations=false
-
+  public currentMonth = 4
+  public index = this.currentMonth + 11
 
   constructor(
     private storage:Storage,

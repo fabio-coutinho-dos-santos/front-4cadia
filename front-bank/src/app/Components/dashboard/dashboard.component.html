@@ -24,7 +24,7 @@
     <div align="center">
       <img class="avatar mat-elevation-z8" src="assets/images/user.png">
       <p *ngIf="flagLoadingInformations" class="name">{{currentUser.name}}</p>
-      <span *ngIf="flagLoadingInformations && sidenav.mode=='side'"  >1900,00 $</span>
+      <span *ngIf="flagLoadingInformations && sidenav.mode=='side'">1900,00 $</span>
     </div>
 
     <mat-divider></mat-divider>
@@ -37,7 +37,7 @@
   </mat-sidenav>
   <mat-sidenav-content>
     <div class="content mat-elevation-z8">
-      <mat-tab-group (selectedTabChange)="tabChanged($event)" class="mat-tab-label-container">
+      <mat-tab-group (selectedTabChange)="tabChanged($event)" [selectedIndex]="index" class="mat-tab-label-container">
         <mat-tab *ngFor="let month of months" label={{month}}>
           <div class="card">
             <mat-card>

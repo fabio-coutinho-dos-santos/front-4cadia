@@ -16,6 +16,15 @@ mat-sidenav{
   padding: 16px;
 }
 
+::ng-deep .mat-tab-label
+{
+  height: 50px !important;
+  min-height: 5px!important;
+  margin: 3px!important;
+  width: 90px!important;
+  min-width: 5px!important;
+}
+
 
 .mat-tab-label-container {
   display: flex;
