@@ -7,35 +7,29 @@
       close
     </mat-icon>
   </button>
-  4CADIA
+  Dashboard
+
+  <div *ngIf="!flagLoadingInformations" style="height: 50px;padding-left: 10px;" class="d-flex justify-content-end">
+    <div style="margin-top: 10px;" class="spinner-border text-danger" role="status">
+      <span class="visually-hidden"></span>
+    </div>
+  </div>
+
 </mat-toolbar>
 
 <mat-sidenav-container>
   <mat-sidenav #sidenav="matSidenav">
     <div align="center">
       <img class="avatar mat-elevation-z8" src="assets/images/user.png">
-      <p class="name">{{currentUser.name}}</p>
-      <!-- <p class="dessignation"> Software Enginner</p> -->
+      <p *ngIf="flagLoadingInformations" class="name">{{currentUser.name}}</p>
     </div>
 
     <mat-divider></mat-divider>
 
     <button mat-button class="menu-button">
-      <mat-icon>person</mat-icon>
-      <span>Balance</span>
+      <mat-icon> attach_money</mat-icon>
+      <span *ngIf="flagLoadingInformations" >Balance = 1900,00 $</span>
     </button>
-    <button mat-button class="menu-button">
-      <mat-icon>home</mat-icon>
-      <span>Extract</span>
-    </button>
-    <!-- <button mat-button class="menu-button">
-      <mat-icon>info</mat-icon>
-      <span>About</span>
-    </button>
-    <button mat-button class="menu-button">
-      <mat-icon>help</mat-icon>
-      <span>Help</span>
-    </button> -->
 
     <mat-divider></mat-divider>
 

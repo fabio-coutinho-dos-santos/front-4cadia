@@ -22,6 +22,7 @@ export class DashboardComponent implements OnInit {
 
   public currentUser:User
   public months = Months
+  public flagLoadingInformations=false
 
 
   constructor(
@@ -57,6 +58,7 @@ export class DashboardComponent implements OnInit {
         this.storage.getItem(StorageKeysTypes.ID_USER),
         this.storage.getItem(StorageKeysTypes.TOKEN))
       .subscribe((user:User)=>{
+        this.flagLoadingInformations=true
         this.currentUser=user
       },(err)=>{
         alert(JSON.stringify(err.error.errors[0]))
