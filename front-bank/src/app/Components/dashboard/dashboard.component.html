@@ -10,7 +10,7 @@
   </button>
   Dashboard
   <span class="span-toolbar" ></span>
-  <span *ngIf="flagLoadingInformations && sidenav.mode=='over'"  >{{finalBalance}} $</span>
+  <span class="balance-toolbar" *ngIf="flagLoadingInformations && sidenav.mode=='over'"  >{{finalBalance}} $</span>
   <div *ngIf="!flagLoadingInformations" style="height: 50px;padding-left: 10px;" class="d-flex justify-content-end">
     <div style="margin-top: 10px;" class="spinner-border text-danger" role="status">
       <span class="visually-hidden"></span>
@@ -21,12 +21,11 @@
 
 <mat-sidenav-container>
   <mat-sidenav #sidenav="matSidenav">
-    <div align="center">
-      <img class="avatar mat-elevation-z8" src="assets/images/user.png">
-      <p *ngIf="flagLoadingInformations" class="name">{{currentUser.name}}</p>
-      <span *ngIf="flagLoadingInformations && sidenav.mode=='side'">{{finalBalance}} $</span>
+    <div class=avatar-align>
+      <img class="avatar mat-elevation-z8" src="assets/images/boss.png">
     </div>
-
+    <p *ngIf="flagLoadingInformations" class="name">{{currentUser.name}}</p>
+    <p class="balance"*ngIf="flagLoadingInformations && sidenav.mode=='side'">{{finalBalance}} $</p>
     <mat-divider></mat-divider>
 
     <button (click)="exitApp()" mat-button class="menu-button">

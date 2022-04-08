@@ -98,22 +98,46 @@ mat-card {
   font-size: 1rem;
 }
 
+.balance-toolbar{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .card-content {
   margin-top: 10%;
+}
+
+.avatar-align {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .avatar {
   margin-top: 16px;
   display: flex;
   align-items: center;
-  width: 120px;
-  height: 120px;
+  justify-content: center;
+  width: 130px;
+  height: 130px;
   border-radius: 50%;
 }
 
 .name {
-  margin-top: 8px;
-  font-weight: normal;
+  margin-top: 20px;
+  display: flex;
+  font-weight: bold;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.balance{
+  display: flex;
+  font-weight: bold;
+  align-items: center;
+  justify-content: center;
 }
 
 .designation {
