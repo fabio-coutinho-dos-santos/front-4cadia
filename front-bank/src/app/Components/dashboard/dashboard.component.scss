@@ -55,6 +55,8 @@ mat-sidenav{
 
 .subtitle {
   font-size: large;
+  display: flex;
+  justify-content: center;
 }
 
 .card {
@@ -109,6 +111,15 @@ mat-card {
 
 
 .balance-toolbar{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.balance-month {
+  color: black;
+  padding-top: 10px;
+  font-size: 1.2rem;
   display: flex;
   align-items: center;
   justify-content: center;

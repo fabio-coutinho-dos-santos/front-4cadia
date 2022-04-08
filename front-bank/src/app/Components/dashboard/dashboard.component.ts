@@ -34,7 +34,7 @@ export class DashboardComponent implements OnInit {
   public finalBalance=0
   public operations:Operation[]=[]
   public flagLoadingStatement=false
-
+  public sumBalanceMonth=0
 
   constructor(
     private storage:Storage,
@@ -59,6 +59,7 @@ export class DashboardComponent implements OnInit {
     this.currentYear = this.getIndexCurrentYear(moment().format('l'))
     this.indexTab = parseInt(this.currentMonth) + 11
     this.screenMonth = this.getMonthAndYearCurrent()
+
     if(this.logged=="FALSE"){
       this.router.navigate(["login"])
     }else{
@@ -113,12 +114,24 @@ export class DashboardComponent implements OnInit {
     this.operationService.getStatementByDate(month,year,this.storage.getItem(StorageKeysTypes.TOKEN))
     .subscribe((operations:Operation[])=>{
       this.operations=operations
-      console.log(this.operations)
+      this.sumBalanceMonth = this.buildStatementByDay()
       this.flagLoadingStatement=true
     },(err)=>{
       alert(JSON.stringify(err.error.errors[0]))
     })
 
+  }
+
+  public buildStatementByDay(){
+    let sum=0
+    for(let operation of this.operations){
+      if(operation.type === "Credit"){
+        sum+=parseFloat(operation.amount)
+      }else{
+        sum-=parseFloat(operation.amount)
+      }
+    }
+    return sum
   }
 
   public getIndexCurrentMonth(date:string){

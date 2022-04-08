@@ -41,6 +41,7 @@
           <div class="card  mat-elevation-z16">
             <mat-card *ngIf="flagLoadingStatement">
               <mat-card-title> Current Balance = $ {{finalBalance}}</mat-card-title>
+              <hr>
               <mat-card-content class="card-content">
                 <mat-card-subtitle class="subtitle">{{screenMonth}}</mat-card-subtitle>
                 <div *ngFor="let operation of operations">
@@ -56,6 +57,10 @@
                       {{operation.date}} - {{operation.hour}}
                     </p>
                   </div>
+                </div>
+                <hr>
+                <div>
+                  <p class="balance-month">Monthly Balance = {{sumBalanceMonth}}$</p>
                 </div>
               </mat-card-content>
             </mat-card>
