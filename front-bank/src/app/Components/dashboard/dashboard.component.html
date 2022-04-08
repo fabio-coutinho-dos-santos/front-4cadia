@@ -38,12 +38,11 @@
     <div class="content mat-elevation-z8">
       <mat-tab-group (selectedTabChange)="tabChanged($event)" [selectedIndex]="indexTab" class="mat-tab-label-container">
         <mat-tab *ngFor="let month of months" label={{month}}>
-
-          <div class="card">
+          <div class="card  mat-elevation-z16">
             <mat-card *ngIf="flagLoadingStatement">
               <mat-card-title> Current Balance = $ {{finalBalance}}</mat-card-title>
               <mat-card-content class="card-content">
-                <mat-card-subtitle class="subtitle">Apr/22</mat-card-subtitle>
+                <mat-card-subtitle class="subtitle">{{screenMonth}}</mat-card-subtitle>
                 <div *ngFor="let operation of operations">
                   <div *ngIf="operation.type == 'Credit'" class="operations-credit">
                     <p>

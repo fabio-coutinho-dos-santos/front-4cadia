@@ -1,5 +1,5 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav, MatTabChangeEvent } from '@angular/material';
 import { Router } from '@angular/router';
 import { User } from 'src/app/Models/User';
@@ -29,6 +29,7 @@ export class DashboardComponent implements OnInit {
   public flagLoadingInformations=false
   public currentMonth = ""
   public currentYear = ""
+  public screenMonth=""
   public indexTab = 0
   public finalBalance=0
   public operations:Operation[]=[]
@@ -38,6 +39,7 @@ export class DashboardComponent implements OnInit {
   constructor(
     private storage:Storage,
     private router:Router,
+    private elementRef:ElementRef,
     private userService:UserService,
     private operationService:OperationService,
     private observer:BreakpointObserver
@@ -56,9 +58,7 @@ export class DashboardComponent implements OnInit {
     this.currentMonth = this.getIndexCurrentMonth(moment().format('l'))
     this.currentYear = this.getIndexCurrentYear(moment().format('l'))
     this.indexTab = parseInt(this.currentMonth) + 11
-    console.log(this.currentMonth)
-    console.log(this.currentYear)
-
+    this.screenMonth = this.getMonthAndYearCurrent()
     if(this.logged=="FALSE"){
       this.router.navigate(["login"])
     }else{
@@ -66,9 +66,11 @@ export class DashboardComponent implements OnInit {
         if(res.matches){
           this.sidenav.mode='over'
           this.sidenav.close()
+          this.elementRef.nativeElement.style.setProperty('--heigh-css', "5%");
         }else{
           this.sidenav.mode='side'
           this.sidenav.open()
+          this.elementRef.nativeElement.style.setProperty('--heigh-css', "20%");
         }
       });
 
@@ -78,6 +80,12 @@ export class DashboardComponent implements OnInit {
     }
   }
 
+  public getMonthAndYearCurrent(){
+    let dateScreen = moment().format('MMMM').substring(0,3)
+    dateScreen+="/"
+    dateScreen+=moment().format('YYYY').substring(2,4)
+    return dateScreen
+  }
 
   public getUserById(){
     this.userService.getUserById(
@@ -129,13 +137,12 @@ export class DashboardComponent implements OnInit {
 
   // ============================================================================ Functions called by screen ========================================================================================
 
-  public tabChanged = (tabChangeEvent: MatTabChangeEvent): void => {
-    console.log('tabChangeEvent => ', tabChangeEvent);
-    console.log('index => ', tabChangeEvent.index);
-    console.log('label => ', tabChangeEvent.tab.textLabel);
+  public tabChanged (tabChangeEvent: MatTabChangeEvent){
+    this.screenMonth = tabChangeEvent.tab.textLabel
     let textLabelTab = tabChangeEvent.tab.textLabel
     let year = this.getYearFromTab(textLabelTab)
     let month = this.getMonth(year,tabChangeEvent.index)
+
     this.getStatementByDate(month,year)
   }
 

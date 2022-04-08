@@ -58,8 +58,11 @@ mat-sidenav{
 }
 
 .card {
-  padding-top: 40px;
-  height: 82vh;
+  background-color: #81d4fa;
+  padding: 40px;
+  padding-left: var(--heigh-css);
+  padding-right: var(--heigh-css);
+  height: 75vh;
   overflow: auto;
 }
 
