@@ -8,6 +8,8 @@ import { Storage } from '../../Untils/Storage';
 import StorageKeysTypes  from "../../Untils/StorageKeyTypes"
 import Months from 'src/app/Untils/Months';
 import { OperationService } from 'src/app/Services/operation.service';
+import * as moment from 'moment';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -24,9 +26,10 @@ export class DashboardComponent implements OnInit {
   public currentUser:User
   public months = Months
   public flagLoadingInformations=false
-  public currentMonth = 4
-  public index = this.currentMonth + 11
+  public currentMonth = 0
+  public indexTab = 0
   public finalBalance=0
+
 
   constructor(
     private storage:Storage,
@@ -38,12 +41,21 @@ export class DashboardComponent implements OnInit {
 
   private logged = this.storage.getItem(StorageKeysTypes.LOGGED)
 
+  public getIndexCurrentMonth(date:string){
+    let aux = date.split("/")
+    return aux[0]
+  }
+
   ngOnInit() {
 
     this.router.navigate["dashboard"]
 
+    // functions used to run tabs in scroll mode
     document.getElementsByClassName('mat-tab-header-pagination-before')[0].remove();
     document.getElementsByClassName('mat-tab-header-pagination-after')[0].remove();
+
+    this.currentMonth = parseInt(this.getIndexCurrentMonth(moment().format('l')))
+    this.indexTab = this.currentMonth + 11
 
     if(this.logged=="FALSE"){
       this.router.navigate(["login"])
@@ -71,12 +83,14 @@ export class DashboardComponent implements OnInit {
       this.operationService.getBalance(this.storage.getItem(StorageKeysTypes.TOKEN))
       .subscribe((resp:any)=>{
         this.finalBalance=resp.balance
+      },(err)=>{
+        alert(JSON.stringify(err.error.errors[0]))
       })
 
     }
   }
 
-  tabChanged = (tabChangeEvent: MatTabChangeEvent): void => {
+  public tabChanged = (tabChangeEvent: MatTabChangeEvent): void => {
     console.log('tabChangeEvent => ', tabChangeEvent);
     console.log('index => ', tabChangeEvent.index);
   }
