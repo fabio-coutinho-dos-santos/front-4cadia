@@ -32,6 +32,7 @@ export class DashboardComponent implements OnInit {
   public indexTab = 0
   public finalBalance=0
   public operations:Operation[]=[]
+  public flagLoadingStatement=false
 
 
   constructor(
@@ -100,9 +101,12 @@ export class DashboardComponent implements OnInit {
   }
 
   public getStatementByDate(month:string,year:string){
+    this.flagLoadingStatement=false
     this.operationService.getStatementByDate(month,year,this.storage.getItem(StorageKeysTypes.TOKEN))
     .subscribe((operations:Operation[])=>{
       this.operations=operations
+      console.log(this.operations)
+      this.flagLoadingStatement=true
     },(err)=>{
       alert(JSON.stringify(err.error.errors[0]))
     })
@@ -128,6 +132,34 @@ export class DashboardComponent implements OnInit {
   public tabChanged = (tabChangeEvent: MatTabChangeEvent): void => {
     console.log('tabChangeEvent => ', tabChangeEvent);
     console.log('index => ', tabChangeEvent.index);
+    console.log('label => ', tabChangeEvent.tab.textLabel);
+    let textLabelTab = tabChangeEvent.tab.textLabel
+    let year = this.getYearFromTab(textLabelTab)
+    let month = this.getMonth(year,tabChangeEvent.index)
+    this.getStatementByDate(month,year)
+  }
+
+  public getYearFromTab(textLabelTab:string){
+    let aux = textLabelTab.split("/")
+    return "20"+aux[1]
+  }
+
+  public getMonth(year:string, index:number){
+    let month=0
+    let monthString=""
+    if(year == "2021"){
+      month = index+1
+    }else if(year == "2022"){
+      month = index-11
+    }
+
+    if(month<10){
+      monthString = "0"+month.toString()
+    }else{
+      monthString = month.toString()
+    }
+
+    return monthString
   }
 
   public exitApp(){
