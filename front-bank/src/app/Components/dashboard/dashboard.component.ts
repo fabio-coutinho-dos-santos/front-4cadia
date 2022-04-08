@@ -26,6 +26,7 @@ export class DashboardComponent implements OnInit {
   public flagLoadingInformations=false
   public currentMonth = 4
   public index = this.currentMonth + 11
+  public finalBalance=0
 
   constructor(
     private storage:Storage,
@@ -66,6 +67,12 @@ export class DashboardComponent implements OnInit {
       },(err)=>{
         alert(JSON.stringify(err.error.errors[0]))
       })
+
+      this.operationService.getBalance(this.storage.getItem(StorageKeysTypes.TOKEN))
+      .subscribe((resp:any)=>{
+        this.finalBalance=resp.balance
+      })
+
     }
   }
 
