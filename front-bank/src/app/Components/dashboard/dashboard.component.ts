@@ -9,6 +9,7 @@ import StorageKeysTypes  from "../../Untils/StorageKeyTypes"
 import Months from 'src/app/Untils/Months';
 import { OperationService } from 'src/app/Services/operation.service';
 import * as moment from 'moment';
+import Operation from 'src/app/Models/Operation';
 
 
 @Component({
@@ -29,6 +30,7 @@ export class DashboardComponent implements OnInit {
   public currentMonth = 0
   public indexTab = 0
   public finalBalance=0
+  public operations:Operation[]=[]
 
 
   constructor(
@@ -83,6 +85,13 @@ export class DashboardComponent implements OnInit {
       this.operationService.getBalance(this.storage.getItem(StorageKeysTypes.TOKEN))
       .subscribe((resp:any)=>{
         this.finalBalance=resp.balance
+      },(err)=>{
+        alert(JSON.stringify(err.error.errors[0]))
+      })
+
+      this.operationService.getStatementByDate("06","2022",this.storage.getItem(StorageKeysTypes.TOKEN))
+      .subscribe((operations:Operation[])=>{
+
       },(err)=>{
         alert(JSON.stringify(err.error.errors[0]))
       })
