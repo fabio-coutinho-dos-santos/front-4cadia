@@ -10,7 +10,8 @@
   </button>
   Dashboard
   <span class="span-toolbar" ></span>
-  <span class="balance-toolbar" *ngIf="flagLoadingInformations && sidenav.mode=='over'"  ><button (click)="exitApp()" mat-button class="menu-button">
+  <span class="balance-toolbar" *ngIf="flagLoadingInformations"  >
+    <button (click)="exitApp()" mat-button class="menu-button">
     <mat-icon>exit_to_app</mat-icon>
   </button>
   </span>

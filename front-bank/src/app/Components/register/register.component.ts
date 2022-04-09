@@ -17,7 +17,9 @@ import StorageKeysTypes  from "../../Untils/StorageKeyTypes"
 export class RegisterComponent implements OnInit {
 
   public flagSubmit=false
-  private
+  public flagShowPassword: boolean = false;
+  public flagShowConfirmPassword: boolean = false;
+
 
   constructor(
     private userService:UserService,
@@ -64,5 +66,13 @@ export class RegisterComponent implements OnInit {
       alert(JSON.stringify(err.error.errors[0]))
       this.flagSubmit=false
     })
+  }
+
+  public showPassword(){
+    this.flagShowPassword = !this.flagShowPassword;
+  }
+
+  public showConfirmPassword(){
+    this.flagShowConfirmPassword = ! this.flagShowConfirmPassword
   }
 }

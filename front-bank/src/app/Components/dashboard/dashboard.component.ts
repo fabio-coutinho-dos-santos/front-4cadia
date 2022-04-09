@@ -101,7 +101,7 @@ export class DashboardComponent implements OnInit {
   }
 
   public getBalanceOperations(){
-    this.operationService.getBalance(this.storage.getItem(StorageKeysTypes.TOKEN))
+    this.operationService.getBalance(this.storage.getItem(StorageKeysTypes.TOKEN),this.storage.getItem(StorageKeysTypes.ID_USER))
     .subscribe((resp:any)=>{
       this.finalBalance=resp.balance
     },(err)=>{
@@ -111,7 +111,7 @@ export class DashboardComponent implements OnInit {
 
   public getStatementByDate(month:string,year:string){
     this.flagLoadingStatement=false
-    this.operationService.getStatementByDate(month,year,this.storage.getItem(StorageKeysTypes.TOKEN))
+    this.operationService.getStatementByDate(month,year,this.storage.getItem(StorageKeysTypes.TOKEN),this.storage.getItem(StorageKeysTypes.ID_USER))
     .subscribe((operations:Operation[])=>{
       this.operations=operations
       this.sumBalanceMonth = this.buildStatementByDay()

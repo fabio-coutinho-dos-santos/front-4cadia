@@ -12,7 +12,7 @@ export class OperationService {
 
   constructor(private http:HttpClient) { }
 
-  public getBalance (token:string) : Observable<Object>{
+  public getBalance (token:string,idUser:string) : Observable<Object>{
 
     const httpOptions = {
       headers: new HttpHeaders({
@@ -22,14 +22,14 @@ export class OperationService {
   }
 
   return this.http.get(
-      `${ Contants.URL_DEV }/api/operation/balance`,
+      `${ Contants.URL_DEV }/api/operation/balance?idUser=${idUser}`,
       httpOptions
   )
   .pipe(map((resp:Object)=>resp))
   }
 
 
-  public getStatementByDate (month:string, year:string, token:string) : Observable<Operation[]>{
+  public getStatementByDate (month:string, year:string, token:string, idUser:string) : Observable<Operation[]>{
 
     const httpOptions = {
       headers: new HttpHeaders({
@@ -39,7 +39,7 @@ export class OperationService {
   }
 
   return this.http.get(
-      `${ Contants.URL_DEV }/api/operation/getStatementByDate?month=${month}&year=${year}`,
+      `${ Contants.URL_DEV }/api/operation/getStatementByDate?idUser=${idUser}&month=${month}&year=${year}`,
       httpOptions
   )
   .pipe(map((resp:Operation[])=>resp))
