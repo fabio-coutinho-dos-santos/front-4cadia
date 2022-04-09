@@ -27,7 +27,7 @@ export class UserService {
   }
 
   return this.http.post(
-      `${ Contants.URL_DEV }/oapi/login`,
+      `${ Contants.URL_DEV }/api/user/login`,
       JSON.stringify(jsonObjset),
       httpOptions
   )
@@ -47,7 +47,7 @@ export class UserService {
   }
 
   return this.http.post(
-      `${ Contants.URL_DEV }/oapi/validateToken`,
+      `${ Contants.URL_DEV }/api/user/validateToken`,
       JSON.stringify(jsonObjset),
       httpOptions
   )
@@ -70,7 +70,7 @@ export class UserService {
   }
 
   return this.http.post(
-      `${ Contants.URL_DEV }/oapi/signup`,
+      `${ Contants.URL_DEV }/api/user/register`,
       JSON.stringify(jsonObjset),
       httpOptions
   )
