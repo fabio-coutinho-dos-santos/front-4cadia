@@ -37,7 +37,7 @@ mat-sidenav{
 .content {
   height: calc(100vh - 98px);
   margin: 16px;
-  margin-left: 32px;
+  margin-left: 16px;
   display: flex;
   justify-content:  flex-start;
   align-items: flex-start;
@@ -66,6 +66,13 @@ mat-sidenav{
   padding-right: var(--padding-css);
   height: 75vh;
   overflow: auto;
+}
+
+mat-card-title{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
 }
 
 .span-toolbar{
