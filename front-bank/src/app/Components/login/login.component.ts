@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from '../../Models/User';
@@ -20,6 +21,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private userService:UserService,
     private router:Router,
+    private observer:BreakpointObserver,
+    private elementRef:ElementRef,
     private storage:Storage
     ) { }
 
@@ -28,7 +31,18 @@ export class LoginComponent implements OnInit {
     'password': new FormControl(null, [Validators.required])
   })
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.observer.observe(['(max-width: 800px)']).subscribe((res)=>{
+      if(res.matches){
+        this.elementRef.nativeElement.style.setProperty('--heigh-css', "40%");
+        this.elementRef.nativeElement.style.setProperty('--margin-top-css', "5%");
+      }else{
+        this.elementRef.nativeElement.style.setProperty('--heigh-css', "100%");
+        this.elementRef.nativeElement.style.setProperty('--margin-top-css', "20%");
+      }
+    });
+  }
+
 
   public submitCredentials(){
     this.flagSubmit=true

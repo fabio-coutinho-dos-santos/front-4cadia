@@ -67,11 +67,11 @@ export class DashboardComponent implements OnInit {
         if(res.matches){
           this.sidenav.mode='over'
           this.sidenav.close()
-          this.elementRef.nativeElement.style.setProperty('--heigh-css', "5%");
+          this.elementRef.nativeElement.style.setProperty('--padding-css', "5%");
         }else{
           this.sidenav.mode='side'
           this.sidenav.open()
-          this.elementRef.nativeElement.style.setProperty('--heigh-css', "20%");
+          this.elementRef.nativeElement.style.setProperty('--padding-css', "20%");
         }
       });
 
