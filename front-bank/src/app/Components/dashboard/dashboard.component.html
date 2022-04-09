@@ -29,7 +29,7 @@
       <img class="avatar mat-elevation-z8" src="assets/images/boss.png">
     </div>
     <p *ngIf="flagLoadingInformations" class="name">{{currentUser.name}}</p>
-    <p class="balance"*ngIf="flagLoadingInformations">Balance = $ {{finalBalance}}</p>
+    <p class="balance"*ngIf="flagLoadingInformations">Balance $ {{finalBalance}}</p>
     <mat-divider></mat-divider>
 
     <button (click)="exitApp()" mat-button class="menu-button">
@@ -44,27 +44,27 @@
         <mat-tab *ngFor="let month of months" label={{month}}>
           <div class="card  mat-elevation-z16">
             <mat-card *ngIf="flagLoadingStatement">
-              <mat-card-title> Current Balance = $ {{finalBalance}}</mat-card-title>
+              <mat-card-title> Current Balance $ {{finalBalance}}</mat-card-title>
               <hr>
               <mat-card-content class="card-content">
                 <mat-card-subtitle class="subtitle">{{screenMonth}}</mat-card-subtitle>
                 <div *ngFor="let operation of operations">
                   <div *ngIf="operation.type == 'Credit'" class="operations-credit">
                     <p>
-                      {{operation.description}} +{{operation.amount}}$ <br>
+                      {{operation.description}} + $ {{operation.amount}} <br>
                       {{operation.date}} - {{operation.hour}}
                     </p>
                   </div>
                   <div *ngIf="operation.type == 'Debit'" class="operations-debit">
                     <p>
-                      {{operation.description}} - {{operation.amount}}$ <br>
+                      {{operation.description}} - $ {{operation.amount}} <br>
                       {{operation.date}} - {{operation.hour}}
                     </p>
                   </div>
                 </div>
                 <hr>
                 <div>
-                  <p class="balance-month">Monthly Balance = {{sumBalanceMonth}}$</p>
+                  <p class="balance-month">Monthly Balance $ {{sumBalanceMonth}}</p>
                 </div>
               </mat-card-content>
             </mat-card>
