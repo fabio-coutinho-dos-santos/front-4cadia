@@ -58,9 +58,11 @@ export class RegisterComponent implements OnInit {
       this.storage.setItem(StorageKeysTypes.TOKEN,user.token)
       this.storage.setItem(StorageKeysTypes.ID_USER,user._id)
       this.storage.setItem(StorageKeysTypes.LOGGED,"TRUE")
+      this.flagSubmit=false
       this.router.navigate(['/dashboard']);
     },(err)=>{
       alert(JSON.stringify(err.error.errors[0]))
+      this.flagSubmit=false
     })
   }
 }

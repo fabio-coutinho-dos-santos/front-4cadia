@@ -52,8 +52,10 @@ export class LoginComponent implements OnInit {
       this.storage.setItem(StorageKeysTypes.ID_USER,user._id)
       this.storage.setItem(StorageKeysTypes.LOGGED,"TRUE")
       this.router.navigate(['/dashboard']);
+      this.flagSubmit=false
     },(err)=>{
       alert(JSON.stringify(err.error.errors[0]))
+      this.flagSubmit=false
     })
   }
 
