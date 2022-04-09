@@ -37,7 +37,8 @@ mat-sidenav{
 .content {
   height: calc(100vh - 98px);
   margin: 16px;
-  margin-left: 16px;
+  margin-left: 32px;
+  margin-right: 32px;
   display: flex;
   justify-content:  flex-start;
   align-items: flex-start;
@@ -60,11 +61,11 @@ mat-sidenav{
 }
 
 .card {
-  background-color:#63a4ff ;
+  background-color:#eeeeee ;
   padding: 40px;
   padding-left: var(--padding-css);
   padding-right: var(--padding-css);
-  height: 75vh;
+  height: 83vh;
   overflow: auto;
 }
 
