@@ -32,6 +32,9 @@ export class LoginComponent implements OnInit {
   })
 
   ngOnInit() {
+
+     // observer used to check size screen dinamically
+    // if screen < 800px reduce adjust interface element changing the css value
     this.observer.observe(['(max-width: 800px)']).subscribe((res)=>{
       if(res.matches){
         this.elementRef.nativeElement.style.setProperty('--heigh-css', "40%");
@@ -45,13 +48,22 @@ export class LoginComponent implements OnInit {
 
 
   public submitCredentials(){
+
+    //set this flag to crate a spinner loading in screen
     this.flagSubmit=true
+
     this.userService.makeLogin(this.loginForm.value.email, this.loginForm.value.password)
     .subscribe((user:User)=>{
+
+      //update session variables TOKEN, ID_USER and LOGGED
       this.storage.setItem(StorageKeysTypes.TOKEN,user.token)
       this.storage.setItem(StorageKeysTypes.ID_USER,user._id)
       this.storage.setItem(StorageKeysTypes.LOGGED,"TRUE")
+
+      //redirect to dashboard page
       this.router.navigate(['/dashboard']);
+
+      //set to erase the spinner
       this.flagSubmit=false
     },(err)=>{
       alert(JSON.stringify(err.error.errors[0]))
@@ -59,6 +71,7 @@ export class LoginComponent implements OnInit {
     })
   }
 
+  // called from click on incon in screen to show password
   public showPassword(){
     this.flagShowPassword = !this.flagShowPassword;
   }

@@ -37,6 +37,9 @@ export class RegisterComponent implements OnInit {
   })
 
   ngOnInit() {
+
+     // observer used to check size screen dinamically
+    // if screen < 800px reduce adjust interface element changing the css value
     this.observer.observe(['(max-width: 800px)']).subscribe((res)=>{
       if(res.matches){
         this.elementRef.nativeElement.style.setProperty('--heigh-css', "40%");
@@ -49,7 +52,11 @@ export class RegisterComponent implements OnInit {
   }
 
   public submitCredentials(){
+
+    //set this flag to crate a spinner loading in screen
     this.flagSubmit=true
+
+
     this.userService.makeRegister(
       this.registerForm.value.name,
       this.registerForm.value.email,
@@ -57,10 +64,16 @@ export class RegisterComponent implements OnInit {
       this.registerForm.value.confirmPassword
       )
     .subscribe((user:User)=>{
+
+      //update session variables TOKEN, ID_USER and LOGGED
       this.storage.setItem(StorageKeysTypes.TOKEN,user.token)
       this.storage.setItem(StorageKeysTypes.ID_USER,user._id)
       this.storage.setItem(StorageKeysTypes.LOGGED,"TRUE")
+
+      //set to erase the spinner
       this.flagSubmit=false
+
+      //redirect to dashboard page
       this.router.navigate(['/dashboard']);
     },(err)=>{
       alert(JSON.stringify(err.error.errors[0]))
@@ -68,10 +81,13 @@ export class RegisterComponent implements OnInit {
     })
   }
 
+
+  // called from click on incon in screen to show password
   public showPassword(){
     this.flagShowPassword = !this.flagShowPassword;
   }
 
+  // called from click on incon in screen to show password
   public showConfirmPassword(){
     this.flagShowConfirmPassword = ! this.flagShowConfirmPassword
   }

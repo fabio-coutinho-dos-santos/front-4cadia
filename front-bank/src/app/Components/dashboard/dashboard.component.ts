@@ -21,8 +21,7 @@ import Operation from 'src/app/Models/Operation';
 
 export class DashboardComponent implements OnInit {
 
-  @ViewChild(MatSidenav,null)
-  sidenav!: MatSidenav;
+  @ViewChild(MatSidenav,{static: true}) sidenav!: MatSidenav;
 
   public currentUser:User
   public months = Months
@@ -45,24 +44,38 @@ export class DashboardComponent implements OnInit {
     private observer:BreakpointObserver
     ) { }
 
+  // get user status if is logged or not
   private logged = this.storage.getItem(StorageKeysTypes.LOGGED)
 
   ngOnInit() {
 
     this.router.navigate["dashboard"]
 
-    // functions used to run tabs in scroll mode
+    // ============================= functions used to run tabs in scroll mode ================================
+
     document.getElementsByClassName('mat-tab-header-pagination-before')[0].remove();
     document.getElementsByClassName('mat-tab-header-pagination-after')[0].remove();
+
+    // ========================================================================================================
+
+    // ============================= functions get and format current date ====================================
 
     this.currentMonth = this.getIndexCurrentMonth(moment().format('l'))
     this.currentYear = this.getIndexCurrentYear(moment().format('l'))
     this.indexTab = parseInt(this.currentMonth) + 11
     this.screenMonth = this.getMonthAndYearCurrent()
 
+    // ========================================================================================================
+
+
+
+    // if user is unlogged navigate to login page
     if(this.logged=="FALSE"){
       this.router.navigate(["login"])
-    }else{
+    }
+    else{
+      // observer used to check size screen dinamically
+      // if screen < 800px close side menu and reduce main card padding, changing the css value
       this.observer.observe(['(max-width: 800px)']).subscribe((res)=>{
         if(res.matches){
           this.sidenav.mode='over'
@@ -75,8 +88,13 @@ export class DashboardComponent implements OnInit {
         }
       });
 
+      // get current user logged by _id
       this.getUserById()
+
+      // get the current balance
       this.getBalanceOperations()
+
+      // get operations statement by current date
       this.getStatementByDate(this.currentMonth,this.currentYear)
     }
   }
@@ -150,20 +168,25 @@ export class DashboardComponent implements OnInit {
 
   // ============================================================================ Functions called by screen ========================================================================================
 
+  // function called when the tab is changed
   public tabChanged (tabChangeEvent: MatTabChangeEvent){
     this.screenMonth = tabChangeEvent.tab.textLabel
     let textLabelTab = tabChangeEvent.tab.textLabel
     let year = this.getYearFromTab(textLabelTab)
     let month = this.getMonth(year,tabChangeEvent.index)
 
+    // get operations statement by date
     this.getStatementByDate(month,year)
   }
 
+  // function used to complet the year in tab:
+  // example if year = 21, the function returned 2021.
   public getYearFromTab(textLabelTab:string){
     let aux = textLabelTab.split("/")
     return "20"+aux[1]
   }
 
+  // function to set correct year en month with the selected tab
   public getMonth(year:string, index:number){
     let month=0
     let monthString=""
@@ -182,6 +205,7 @@ export class DashboardComponent implements OnInit {
     return monthString
   }
 
+  // function to logout
   public exitApp(){
     this.storage.cleanStorage()
     this.router.navigate(["login"])
