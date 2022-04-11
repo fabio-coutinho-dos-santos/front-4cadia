@@ -21,7 +21,6 @@
 		- Caso o usuário efetue o login com as credênciais corretas ele é redirecionado para a dashboard
 		- Ao efetuar o login são gravados o _id do usuário e o seu token jwt como variáveis de seção.
 		- A tela é completamente responsiva adequando a vializaçãodos componentes para dispositivos móveis.
-		- Fluxo simplificado
 		
  		### Register
 		- Pagina onde o usuário efetua seu registro no sistema, enviando Nome, Email, Senha, Confirmação e Confirmação da Senha para a API REST do backend.
@@ -29,7 +28,6 @@
 		- O usuário também pode retornar para a tela de login clicando no link "[Have an account, sign in!](https://coutmastersolution.ml/login "Have an account, sign in!")
 		- Caso haja problemas com a senha, ou o email já esteja cadastrado o usuário é informado por meio de um alert.
 		- A tela é completamente responsiva adequando a vializaçãodos componentes para dispositivos móveis.
-		- Fluxo simplificado
 		
 		 ### Dashboard
 		- Na página dashboard há um menu a esquerda, responsivo, que mostra o saldo atual do usúario e também seu nome.
