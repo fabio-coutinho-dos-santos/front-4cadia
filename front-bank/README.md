@@ -45,8 +45,8 @@
  - Este droplet contém um ubuntu server v20.04 com um servido NGINX instalado contendo um certificado ssl válido.
  - Para agilizar a realização do teste foi escolhida esta forma de deploy pois este ambiente já existia e era mantido por min, assim, foi utilizado para disponibilizar a aplicação de forma segura economizando tempo.
  - Credenciais de usuário que podem ser utilizadas para realizar login
-  - email: rc@gmail.com
-  - password: Rcarlos20
+   - email: rc@gmail.com
+   - password: Rcarlos20
 
 ## Importante
  - Toda a documentação do projeto da API REST que complementa o teste está no repósitório do projeto da API em https://github.com/fabio-coutinho-dos-santos/api-4cadia
