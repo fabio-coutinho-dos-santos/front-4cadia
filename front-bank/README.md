@@ -1,4 +1,4 @@
-# Front end
+# Front end - v1.0
 - Desenvolvido utilizando:
 -  Angular v9.0.1
 - Node v10.14.0
