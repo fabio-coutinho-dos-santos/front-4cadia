@@ -38,3 +38,9 @@
 		- Como estratégia de consumo dos dados da api, quando o usuário clica nas tabs para trocar de mês é realizado um requisição para a API REST para buscar as operações apenas daquele mês/ano selecionado pelo usuário.
 		 Esta tela é totalmente responsiva e suprime o menu lateral para se adequar aos dispositvivos móveis.
 		
+##Deploy
+ - O processo de deploy se inicia realizando o build de produção, por meio no comando "ng build --prod".
+ - Este comando gera uma pasta dist contendo oss aquivo minificados do projeto.
+ - Em seguida, esta pasta é enviada para um droplet da digital ocean que que possuo e é cadastrada no domínio https://coutmastersolution.ml
+ - Este droplet contém um ubuntu server v20.04 com um servido NGINX instalado contendo um certificado ssl válido.
+ - Para agilizar a realização do teste foi escolhida esta forma de deploy pois este ambiente já exisita e era mantido por min, assim, foi utilizado para disponibilizar a aplicação de forma segura economizando tempo.
