@@ -47,3 +47,8 @@
 
 ## Importante
  - Toda a documentação do projeto da API REST que complementa o teste está no repósitório do projeto da API em https://github.com/fabio-coutinho-dos-santos/api-4cadia
+ - Para executar localmente a aplicação:
+  - Clonar o repositório
+  - Executar npm install
+  - Executar ng serve
+  - Acessar localhost:4200
