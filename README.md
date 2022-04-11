@@ -22,13 +22,7 @@
 		- Ao efetuar o login são gravados o _id do usuário e o seu token jwt como variáveis de seção.
 		- A tela é completamente responsiva adequando a vializaçãodos componentes para dispositivos móveis.
 		- Fluxo simplificado
-		```seq
-        Login->API REST : Envia(email, senha) 
-        Note over API REST : Realiza Validação
-        API REST -> Login: Envia o resultado
-        Login--> Dashboard: Sucesso na requisição\n- Redireciona para dashboard
-        Login--> Login: Erro na validação\n(Alert "Descrição do Erro")
-        ```
+		
  		### Register
 		- Pagina onde o usuário efetua seu registro no sistema, enviando Nome, Email, Senha, Confirmação e Confirmação da Senha para a API REST do backend.
 		- Passando por todas as validações dos campos, o usuário é registrado com sucesso e seu login é efetuado automaticamente no sistema.
@@ -36,13 +30,7 @@
 		- Caso haja problemas com a senha, ou o email já esteja cadastrado o usuário é informado por meio de um alert.
 		- A tela é completamente responsiva adequando a vializaçãodos componentes para dispositivos móveis.
 		- Fluxo simplificado
-		```seq
-        Register->API REST : Envia(nome,email, senha\nconfirmação da senha) 
-        Note over API REST : - Realiza Validação\n- Grava no banco de dados
-        API REST -> Register: Envia o resultado
-        Register--> Dashboard: Sucesso na requisição\n- Redireciona para dashboard
-        Register--> Register: Erro na validação\n(Alert "Descrição do Erro")
-        ```
+		
 		 ### Dashboard
 		- Na página dashboard há um menu a esquerda, responsivo, que mostra o saldo atual do usúario e também seu nome.
 		- No canto superior direito, dentro da tollbar há um botão que permite que o usuário saia do sisitema
@@ -51,15 +39,4 @@
 		- Para realização deste teste, o intervalo possível de ver o extrado é de janeiro de 2021 a dezembro de 2022.
 		- Como estratégia de consumo dos dados da api, quando o usuário clica nas tabs para trocar de mês é realizado um requisição para a API REST para buscar as operações apenas daquele mês/ano selecionado pelo usuário.
 		 Esta tela é totalmente responsiva e suprime o menu lateral para se adequar aos dispositvivos móveis.
-		 - Fluxo simplificado
-		```seq
-        Dashboard->API REST : buscar o usuário logado\n por meio do _id 
-        API REST -> Dashboard: Envia o Usuário
-        Dashboard->API REST : buscar o saldo do usuário por meio do  _id 
-        API REST -> Dashboard: Envia o saldo do usuário
-        note over Dashboard: Mostrar informaões do usuário\n e seu saldo no side menu
-        note over Dashboard: Seleciona mês/ano pelas tabs
-        Dashboard->API REST : buscar o extrato do usuário \npor meio do  _id, mês e ano 
-        API REST -> Dashboard: Envia as operações do mês/ano
-        note over Dashboard: Constrói a tela principal monstrando\nas operações e o saldo do mês
-        ```
+		
