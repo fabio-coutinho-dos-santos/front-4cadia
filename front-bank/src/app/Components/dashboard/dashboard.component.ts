@@ -64,7 +64,7 @@ export class DashboardComponent implements OnInit {
     this.currentYear = this.getIndexCurrentYear(moment().format('l'))
     this.indexTab = parseInt(this.currentMonth) + 11
     this.screenMonth = this.getMonthAndYearCurrent()
-
+    
     // ========================================================================================================
 
 
@@ -102,7 +102,7 @@ export class DashboardComponent implements OnInit {
   public getMonthAndYearCurrent(){
     let dateScreen = moment().format('MMMM').substring(0,3)
     dateScreen+="/"
-    dateScreen+=moment().format('YYYY').substring(2,4)
+    dateScreen+=parseInt(moment().format('YYYY').substring(2,4).valueOf()) - 1
     return dateScreen
   }
 
